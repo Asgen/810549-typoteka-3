@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 - Студент: [Henry Tsayukov](https://up.htmlacademy.ru/nodejs/3/user/810549).
-- Наставник: `Сергей Вохмянин`.
+- Наставник: [Сергей Вохмянин](https://htmlacademy.ru/profile/id530823)
 
 ---
 
