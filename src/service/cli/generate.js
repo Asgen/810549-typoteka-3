@@ -64,10 +64,10 @@ const CATEGORIES = [
 const generate = (count) => (
   Array(count).fill({}).map(() => ({
     title: TITLES[getRandomInt(0, TITLES.length - 1)],
-    announce: shuffle(SENTENCES).slice(1, 5).join(` `),
-    fullText: shuffle(SENTENCES).slice(1, getRandomInt(0, SENTENCES.length - 1)).join(` `),
-    category: shuffle(CATEGORIES).slice(1, getRandomInt(0, CATEGORIES.length - 1)),
-    createdDate: new Date().toLocaleString()
+    announce: shuffle(SENTENCES).slice(0, 5).join(` `),
+    fullText: shuffle(SENTENCES).slice(0, getRandomInt(0, SENTENCES.length - 1)).join(` `),
+    category: shuffle(CATEGORIES).slice(0, getRandomInt(0, CATEGORIES.length - 1)),
+    createdDate: new Date().toISOString()
   }))
 );
 
@@ -77,14 +77,27 @@ module.exports = {
   run(args) {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
+
+    if (countOffer > 1000) {
+      console.info(`Не больше 1000 публикаций`);
+
+      return;
+    }
+
     const content = JSON.stringify(generate(countOffer), null, 4);
 
     fs.writeFile(FILE_NAME, content, (err) => {
       if (err) {
-        return console.error(`Can't write data to file...`);
+        console.error(`Can't write data to file...`);
+
+        process.exitCode = 1;
+
+        return;
       }
 
-      return console.info(`Operation success. File created.`);
+      console.info(`Operation success. File created.`);
+
+      return;
     });
   },
 };
