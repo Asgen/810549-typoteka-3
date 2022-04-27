@@ -4,7 +4,7 @@ const chalk = require(`chalk`);
 const packageJsonFile = require(`../../../package.json`);
 
 const showVersion = () => {
-  console.info(`App version: ${chalk.green(packageJsonFile.version)}`);
+  console.info(`App version: ${chalk.blue(packageJsonFile.version)}`);
 };
 
 module.exports = {
