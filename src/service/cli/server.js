@@ -60,7 +60,9 @@ module.exports = {
     })
     .on(`error`, ({message}) => {
       console.error(chalk.red(`Ошибка при создании сервера: ${message}`));
+
+      process.exit(1);
     });
 
   }
-}
+};

@@ -42,6 +42,8 @@ module.exports = {
     if (countOffer > MAX_COUNT) {
       console.info(chalk.red(`Не больше ${MAX_COUNT} публикаций`));
 
+      process.exit(1);
+
       return;
     }
 
