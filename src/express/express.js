@@ -9,8 +9,8 @@ const DEFAULT_PORT = 8081;
 
 const app = express();
 app.use(`/`, mainRoutes);
-app.use(`/`, articlesRoutes);
-app.use(`/`, myRoutes);
+app.use(`/articles`, articlesRoutes);
+app.use(`/my`, myRoutes);
 
 app.listen(DEFAULT_PORT);
 
