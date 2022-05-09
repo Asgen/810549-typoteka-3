@@ -5,7 +5,7 @@ const {Router} = require(`express`);
 const myRouter = new Router();
 
 myRouter.get(`/`, async (req, res) => {
-  res.send(`/my`);
+  res.render(`my-tickets`);
 });
 
 myRouter.get(`/categories`, async (req, res) => {
@@ -13,7 +13,7 @@ myRouter.get(`/categories`, async (req, res) => {
 });
 
 myRouter.get(`/comments`, async (req, res) => {
-  res.send(`/my/comments`);
+  res.render(`comments`);
 });
 
 module.exports = myRouter;
