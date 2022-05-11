@@ -26,6 +26,7 @@ const sendResponse = (res, statusCode, message) => {
   res.end(template);
 };
 
+// Cb on connection
 const onClientConnect = async (req, res) => {
   const notFoundMessageText = `Not found`;
 
