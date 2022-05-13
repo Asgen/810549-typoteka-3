@@ -27,12 +27,7 @@ const sendResponse = (res, statusCode, message) => {
   res.end(template);
 };
 
-<<<<<<< HEAD
 app.get(`/`, async (req, res) => {
-=======
-// Cb on connection
-const onClientConnect = async (req, res) => {
->>>>>>> 91b1a9a17674ed52eb43ef0b28d33bd65298eaa5
   const notFoundMessageText = `Not found`;
 
   try {
