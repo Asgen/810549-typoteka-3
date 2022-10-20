@@ -1,44 +1,22 @@
 "use strict";
-
 const chalk = require(`chalk`);
-const fs = require(`fs`).promises;
 const express = require(`express`);
-const {HttpCode} = require(`../../constants`);
-
+const routes = require(`../routes/index`);
+const articlesRoutes = require(`../routes/articles`);
+const {readJson} = require(`../../utils`);
 const DEFAULT_PORT = 3000;
 const FILENAME = `mocks.json`;
 
+(async function () {
+  global.mockFileContent = await readJson(FILENAME);
+})();
+
 const app = express();
+app.use(express.json());
+app.use(`/`, routes);
+app.use(`/articles`, articlesRoutes);
+app.set(`view engine`, `html`);
 
-const sendResponse = (res, statusCode, message) => {
-  const template = `
-    <!Doctype html>
-      <html lang="ru">
-      <head>
-        <title>With love from Node</title>
-      </head>
-      <body>${message}</body>
-    </html>`.trim();
-
-  res.writeHead(statusCode, {
-    'Content-Type': `text/html; charset=UTF-8`,
-  });
-
-  res.end(template);
-};
-
-app.get(`/`, async (req, res) => {
-  const notFoundMessageText = `Not found`;
-
-  try {
-    const fileContent = await fs.readFile(FILENAME);
-    const mocks = JSON.parse(fileContent);
-    const message = mocks.map((post) => `<li>${post.title}</li>`).join(``);
-    sendResponse(res, HttpCode.OK, `<ul>${message}</ul>`);
-  } catch (err) {
-    sendResponse(res, HttpCode.NOT_FOUND, notFoundMessageText);
-  }
-});
 
 module.exports = {
   name: `--server`,

@@ -7,6 +7,7 @@
     "test": "npm run eslint",
     "eslint": "eslint --ext .js src/",
     "start": "npx nodemon ./src/service/service.js --server",
+    "generate":"node ./src/service/service.js --generate",
     "start-frontend-server": "node ./src/express/express.js"
   },
   "repository": {
