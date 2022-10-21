@@ -30,4 +30,14 @@ const readContent = async (filePath) => {
   }
 };
 
-module.exports = {getRandomInt, shuffle, readContent};
+const readJson = async (filePath) => {
+  try {
+    const content = await fs.readFile(filePath);
+    return JSON.parse(content);
+  } catch (err) {
+    console.error(chalk.red(err));
+    return [];
+  }
+};
+
+module.exports = {getRandomInt, shuffle, readContent, readJson};
