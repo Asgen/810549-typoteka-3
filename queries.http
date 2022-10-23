@@ -1,6 +1,2 @@
-POST http://localhost:3000/articles/zohl/comments
+GET http://localhost:3000/articlesss
 Content-Type: application/json
-
-{
-  "text": "fghdfghdfghdfghdfgh"
-}

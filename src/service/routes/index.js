@@ -3,7 +3,6 @@ const {Router} = require(`express`);
 const {readContent} = require(`../../utils`);
 const CATEGORIES_FILE_PATH = `data/categories.txt`;
 
-
 const router = new Router();
 
 router.get(`/`, async (req, res) => {

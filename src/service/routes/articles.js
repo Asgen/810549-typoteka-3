@@ -3,7 +3,6 @@ const {nanoid} = require(`nanoid`);
 const {Router} = require(`express`);
 const {MAX_ID_LENGTH, REQUIRED_FIELDS, HttpCode} = require(`../../constants.js`);
 
-
 const router = new Router();
 
 const checkMockFile = (res) => {
@@ -13,12 +12,13 @@ const checkMockFile = (res) => {
   }
 };
 
-router.get(`/`, async (req, res) => {
+router.get(`/`, async (req, res, next) => {
   checkMockFile(res);
   res.send(global.mockFileContent);
+  next();
 });
 
-router.post(`/`, async (req, res) => {
+router.post(`/`, async (req, res, next) => {
   checkMockFile(res);
   let sentData = req.body;
   const isValid = REQUIRED_FIELDS.every((item) => Object.keys(sentData).includes(item));
@@ -26,6 +26,7 @@ router.post(`/`, async (req, res) => {
   if (!isValid) {
     res.writeHead(HttpCode.INVALID_DATA);
     res.end(`Please fill all required fields.`);
+    next();
     return;
   }
 
@@ -35,22 +36,25 @@ router.post(`/`, async (req, res) => {
   global.mockFileContent.push({sentData});
 
   res.send(sentData);
+  next();
 });
 
-router.get(`/:articleId`, async (req, res) => {
+router.get(`/:articleId`, async (req, res, next) => {
   checkMockFile(res);
   const article = global.mockFileContent.find((item) => item.id === req.params.articleId);
 
   if (!article) {
     res.writeHead(HttpCode.NOT_FOUND);
     res.end(`Article not fount.`);
+    next();
     return;
   }
 
   res.send(article);
+  next();
 });
 
-router.put(`/:articleId`, async (req, res) => {
+router.put(`/:articleId`, async (req, res, next) => {
   checkMockFile(res);
 
   const articleIndex = global.mockFileContent.findIndex((item) => item.id === req.params.articleId);
@@ -58,6 +62,7 @@ router.put(`/:articleId`, async (req, res) => {
   if (articleIndex < 0) {
     res.writeHead(HttpCode.NOT_FOUND);
     res.end(`Article not fount.`);
+    next();
     return;
   }
 
@@ -67,15 +72,17 @@ router.put(`/:articleId`, async (req, res) => {
   if (!isValid) {
     res.writeHead(HttpCode.INVALID_DATA);
     res.end(`Please fill all required fields.`);
+    next();
     return;
   }
 
   global.mockFileContent[articleIndex] = {...global.mockFileContent[articleIndex], ...sentData};
 
   res.send(global.mockFileContent[articleIndex]);
+  next();
 });
 
-router.delete(`/:articleId`, async (req, res) => {
+router.delete(`/:articleId`, async (req, res, next) => {
   checkMockFile(res);
 
   const articleIndex = global.mockFileContent.findIndex((item) => item.id === req.params.articleId);
@@ -83,30 +90,33 @@ router.delete(`/:articleId`, async (req, res) => {
   if (articleIndex < 0) {
     res.writeHead(HttpCode.NOT_FOUND);
     res.end(`Article not fount.`);
+    next();
     return;
   }
 
   global.mockFileContent.splice(articleIndex, 1);
 
   res.send(`Deleted`);
+  next();
 });
 
-router.get(`/:articleId/comments`, async (req, res) => {
+router.get(`/:articleId/comments`, async (req, res, next) => {
   checkMockFile(res);
 
   const article = global.mockFileContent.find((item) => item.id === req.params.articleId);
   res.send(article.comments);
+  next();
 });
 
-router.post(`/:articleId/comments`, async (req, res) => {
+router.post(`/:articleId/comments`, async (req, res, next) => {
   checkMockFile(res);
   let sentData = req.body;
-  console.log(`*******`, sentData);
   const articleIndex = global.mockFileContent.findIndex((item) => item.id === req.params.articleId);
 
   if (!sentData || articleIndex < 1) {
     res.writeHead(HttpCode.INVALID_DATA);
     res.end(`Invalid data.`);
+    next();
     return;
   }
 
@@ -124,9 +134,10 @@ router.post(`/:articleId/comments`, async (req, res) => {
   }
 
   res.send(article);
+  next();
 });
 
-router.delete(`/:articleId/comments/:commentId`, async (req, res) => {
+router.delete(`/:articleId/comments/:commentId`, async (req, res, next) => {
   checkMockFile(res);
 
   const articleIndex = global.mockFileContent.findIndex((item) => item.id === req.params.articleId);
@@ -135,6 +146,7 @@ router.delete(`/:articleId/comments/:commentId`, async (req, res) => {
   if (articleIndex < 0 || (!article.comments || article.comments.length < 1)) {
     res.writeHead(HttpCode.NOT_FOUND);
     res.end(`Article or comment not fount.`);
+    next();
     return;
   }
 
@@ -143,6 +155,7 @@ router.delete(`/:articleId/comments/:commentId`, async (req, res) => {
   if (commentIndex < 0) {
     res.writeHead(HttpCode.NOT_FOUND);
     res.end(`Comment not fount.`);
+    next();
     return;
   }
 
@@ -150,6 +163,7 @@ router.delete(`/:articleId/comments/:commentId`, async (req, res) => {
   global.mockFileContent[articleIndex] = article;
 
   res.send(`Deleted`);
+  next();
 });
 
 
