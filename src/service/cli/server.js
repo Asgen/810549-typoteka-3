@@ -17,11 +17,13 @@ const app = express();
 app.use(express.json());
 app.use(startRequest);
 app.use(`/`, routes);
-app.use(`/articles`, articlesRoutes);
+app.use(`/articles`, articlesRoutes, showStatusCode);
 app.set(`view engine`, `html`);
 
-app.use(showStatusCode);
-
+app.use((req, res) => {
+  logger.error(`End request with error 404`);
+  res.status(404).send(`Page not found`);
+});
 
 module.exports = {
   name: `--server`,

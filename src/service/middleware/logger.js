@@ -1,16 +1,16 @@
 'use strict';
 require(`dotenv`).config();
 const {HttpCode} = require(`../../constants.js`);
-const logger = require(`pino`)({
+const pino = require(`pino`);
+
+const streams = [
+  {level: `debug`, stream: process.stdout},
+  {level: `debug`, stream: pino.destination(`logs/all.log`)}];
+
+const logger = pino({
   name: `pino-and-express`,
   level: process.env.LOG_LEVEL || `info`,
-},
-require(`pino`).multistream(
-    [
-      {stream: process.stdout},
-      {stream: require(`pino`).destination(`logs/pino-logger.log`)},
-    ]
-)
+}, pino.multistream(streams)
 );
 
 module.exports = {
@@ -22,7 +22,6 @@ module.exports = {
     return logger.child(options);
   },
   startRequest(req, res, next) {
-    logger.debug(`Start blabla`);
     logger.debug(`Start request ${req.method.toUpperCase()}${req.url}`);
     next();
   },
@@ -31,9 +30,9 @@ module.exports = {
       logger.info(`Request finished with status code ${res.statusCode}`);
       return;
     }
-
-    logger.error(`End request with error ${res.statusCode}`);
-    return;
-
   },
+  lostRoutes(req, res) {
+    res.status(404).send(`Page not found`);
+    logger.error(`End request with error 404`);
+  }
 };

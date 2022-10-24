@@ -1,2 +1,3 @@
-GET http://localhost:3000/articlesss
+POST http://localhost:3000/articles
 Content-Type: application/json
+
