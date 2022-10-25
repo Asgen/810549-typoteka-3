@@ -4,6 +4,7 @@
   "description": "Типотека",
   "main": "./src/service/service.js",
   "scripts": {
+    "test": "jest",
     "eslint": "eslint --ext .js src/",
     "start": "LOG_LEVEL=error npx nodemon ./src/service/service.js --server | ./node_modules/.bin/pino-pretty",
     "start::debug": "LOG_LEVEL=debug npx nodemon ./src/service/service.js --server | ./node_modules/.bin/pino-pretty",

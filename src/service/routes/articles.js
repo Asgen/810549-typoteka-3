@@ -102,7 +102,7 @@ router.delete(`/:articleId`, checkMockFile, async (req, res, next) => {
   next();
 });
 
-router.get(`/:articleId/comments`, checkMockFile,  async (req, res, next) => {
+router.get(`/:articleId/comments`, checkMockFile, async (req, res, next) => {
   const article = global.mockFileContent.find((item) => item.id === req.params.articleId);
   res.send(article.comments);
   next();
