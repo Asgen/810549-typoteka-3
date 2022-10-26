@@ -15,6 +15,10 @@ const FILENAME = `mocks.json`;
 
 const app = express();
 app.use(express.json());
+app.use((req, res, next) => {
+  res.set(`Cache-Control`, `no-store`);
+  next();
+});
 app.use(startRequest);
 app.use(`/`, routes);
 app.use(`/articles`, articlesRoutes, showStatusCode);
@@ -39,6 +43,7 @@ module.exports = {
       // Логируем ошибку, если сервер не смог стартовать
       logger.error(`Server can't start. Error: ${err}`);
     });
-  }
+  },
+  server: app
 };
 

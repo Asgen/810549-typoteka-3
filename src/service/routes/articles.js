@@ -112,7 +112,7 @@ router.post(`/:articleId/comments`, checkMockFile, async (req, res, next) => {
   let sentData = req.body;
   const articleIndex = global.mockFileContent.findIndex((item) => item.id === req.params.articleId);
 
-  if (!sentData || articleIndex < 1) {
+  if (!sentData || !sentData.text || articleIndex < 0) {
     res.writeHead(HttpCode.INVALID_DATA);
     res.end(`Invalid data.`);
     logger.error(`End request with error ${HttpCode.INVALID_DATA}`);

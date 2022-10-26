@@ -1,3 +1,16 @@
+GET http://localhost:3000/articles
+
+###
+
 POST http://localhost:3000/articles
 Content-Type: application/json
 
+###
+
+# Post new comment
+POST http://localhost:3000/articles/uO5j/comments
+Content-Type: application/json
+
+{
+"text": "sdfsdf"
+}
