@@ -42,7 +42,6 @@ describe(`Articles API end-points`, () => {
   });
   test(`When get article status code should be 200`, async () => {
     global.mockFileContent = [...mocks];
-    console.log(`------------###########`, global.mockFileContent);
     const res = await request(server).get(`/articles/xuO5j`);
     expect(res.statusCode).toBe(200);
   });
