@@ -27,7 +27,7 @@ router.get(`/`, checkMockFile, async (req, res, next) => {
 
 router.post(`/`, checkMockFile, async (req, res, next) => {
   let sentData = req.body;
-  const isValid = REQUIRED_FIELDS.every((item) => Object.keys(sentData).includes(item));
+  const isValid = REQUIRED_FIELDS.every((item) => Object.keys(sentData).includes(item) && sentData[item] && sentData[item].length > 0);
 
   if (!isValid) {
     res.writeHead(HttpCode.INVALID_DATA);
@@ -38,8 +38,9 @@ router.post(`/`, checkMockFile, async (req, res, next) => {
 
   sentData.createdDate = new Date().toISOString();
   sentData.id = nanoid(MAX_ID_LENGTH);
+  sentData.category = Array.isArray(sentData.category) ? sentData.category : [sentData.category];
 
-  global.mockFileContent.push({sentData});
+  global.mockFileContent.push(sentData);
 
   res.send(sentData);
   next();

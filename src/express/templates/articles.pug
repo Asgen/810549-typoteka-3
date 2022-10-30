@@ -1,0 +1,16 @@
+div
+  each article of articles
+    h3= article.title
+    ul
+      li
+        p='Announce: ' + article.announce
+        p='Full text: ' + article.fullText
+        ul='Categories:'
+        if article.category
+          each category in article.category
+            li= category
+        p='Created date: ' + article.createdDate
+        ul='Comments: '
+        if article.comments
+          each comment in article.comments
+            li= comment.text
