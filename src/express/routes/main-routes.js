@@ -1,11 +1,12 @@
 'use strict';
-
 const {Router} = require(`express`);
+const {getArticles, findArticles} = require(`../api/articles`);
 
 const mainRouter = new Router();
 
 mainRouter.get(`/`, async (req, res) => {
-  res.render(`main`);
+  const articles = await getArticles();
+  res.render(`articles`, {articles: articles.data});
 });
 
 mainRouter.get(`/register`, async (req, res) => {
@@ -17,7 +18,15 @@ mainRouter.get(`/login`, async (req, res) => {
 });
 
 mainRouter.get(`/search`, async (req, res) => {
-  res.render(`search-results`);
+  res.render(`search-result`, req.query);
+});
+mainRouter.post(`/search`, async (req, res) => {
+  const result = await findArticles(req.body.query);
+  if (result && result.length) {
+    res.render(`search-result`, {articles: result, query: req.body.query});
+  } else {
+    res.redirect(`/search?query=${req.body.query || ''}`);
+  }
 });
 
 module.exports = mainRouter;

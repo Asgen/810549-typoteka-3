@@ -1,0 +1,31 @@
+extends layouts/default.pug
+
+block content
+  main
+    h1.visually-hidden Добавление публикации
+    section
+      .popup.popup--registration.popup--anti
+        a.popup__button.button.button--popup-close(aria-label='Закрыть окно')
+          | Закрыть
+          | окно
+        h2.popup__title Добавление публикации
+        .popup__form.popup__form--active.form.form--register
+          form(action='/articles/add' method='post')
+            .form__field
+              label
+                input(type='text' name='title' placeholder='Заголовок поста' required='' value=(title ? title : ''))
+            .form__field
+              label
+                input(type='text' name='category' placeholder='Категория' required='' value=(category ? category : ''))
+            .form__field
+              label
+                input(type='text' name='announce' placeholder='Анонс' required='' value=(announce ? announce : ''))
+            .form__field
+              label
+                input(type='text' name='fullText' placeholder='Текст' value=(fullText ? fullText : ''))
+            .form__validation-error
+              p.form__error-message При добавлении произошли ошибки:
+              ul.form__errors
+                li.form__error Пароль не может состоять из двух букв
+                li.form__error Фамилия не должна быть смешной
+            button.form__submit-btn.form__submit-btn--register.button.button--colored(type='submit') Опубликовать

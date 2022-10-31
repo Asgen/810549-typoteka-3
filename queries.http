@@ -5,6 +5,13 @@ GET http://localhost:3000/articles
 POST http://localhost:3000/articles
 Content-Type: application/json
 
+{
+  "title": "sdfgsdfg",
+  "category": "sdfgsdfg",
+  "announce": "sdfgsdfg",
+  "fullText": "sdfgsdfg"
+}
+
 ###
 
 # Post new comment
@@ -14,3 +21,7 @@ Content-Type: application/json
 {
 "text": "sdfsdf"
 }
+
+###
+GET http://localhost:3000/search?query=продам
+
