@@ -40,4 +40,8 @@ const readJson = async (filePath) => {
   }
 };
 
-module.exports = {getRandomInt, shuffle, readContent, readJson};
+const getPictureFileName = (index) => {
+  return `avatar${index}`;
+};
+
+module.exports = {getRandomInt, shuffle, readContent, readJson, getPictureFileName};

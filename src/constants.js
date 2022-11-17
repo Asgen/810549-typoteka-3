@@ -23,5 +23,10 @@ const REQUIRED_FIELDS = [
   `fullText`
 ];
 
+const USER_ROLES = [
+  `автор`,
+  `читатель`
+];
 
-module.exports = {MAX_ID_LENGTH, DEFAULT_COMMAND, USER_ARGV_INDEX, ExitCode, HttpCode, REQUIRED_FIELDS};
+
+module.exports = {MAX_ID_LENGTH, DEFAULT_COMMAND, USER_ARGV_INDEX, ExitCode, HttpCode, REQUIRED_FIELDS, USER_ROLES};

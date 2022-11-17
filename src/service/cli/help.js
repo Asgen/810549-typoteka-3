@@ -15,6 +15,7 @@ const showHelp = () => {
     "--help": {описание: `печатает этот текст`},
     "--version": {описание: `выводит номер версии`},
     "--generate <count>": {описание: `формирует файл mocks.json`},
+    "--fill <count>": {описание: `формирует fill-db.sql`},
   };
 
   console.info(chalk.gray(text));
