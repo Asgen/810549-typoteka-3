@@ -1,0 +1,8 @@
+CREATE DATABASE typoteka_1
+  WITH
+  OWNER = postgres
+  ENCODING = 'UTF8'
+  TEMPLATE = template0
+  LC_COLLATE = 'C'
+  LC_CTYPE = 'C'
+  CONNECTION LIMIT = -1;

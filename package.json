@@ -9,6 +9,7 @@
     "start": "LOG_LEVEL=error npx nodemon ./src/service/service.js --server | ./node_modules/.bin/pino-pretty",
     "start::debug": "LOG_LEVEL=debug npx nodemon ./src/service/service.js --server | ./node_modules/.bin/pino-pretty",
     "generate": "node ./src/service/service.js --generate",
+    "generate-fill-sql": "node ./src/service/service.js --fill",
     "start-frontend-server": "npx nodemon ./src/express/express.js"
   },
   "repository": {
