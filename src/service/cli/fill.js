@@ -6,7 +6,7 @@ const fs = require(`fs/promises`);
 const {getRandomInt, shuffle, readContent, getPictureFileName} = require(`../../utils`);
 
 const DEFAULT_COUNT = 5;
-const MAX_COUNT = 10;
+const MAX_COUNT = 50;
 const MAX_COMMENTS = 5;
 const FILE_NAME = `fill-db.sql`;
 
@@ -61,25 +61,6 @@ const generateArticles = (count, titles, categoryCount, userCount, sentences, co
   }))
 );
 
-// const generate = (count, titles, categories, sentences, comments) =>
-//   Array(count)
-//     .fill({})
-//     .map(() => ({
-//       title: titles[getRandomInt(0, titles.length - 1)],
-//       announce: shuffle(sentences).slice(0, 5).join(` `),
-//       fullText: shuffle(sentences)
-//         .slice(0, getRandomInt(0, sentences.length - 1))
-//         .join(` `),
-//       category: shuffle(categories).slice(
-//           0,
-//           getRandomInt(0, categories.length - 1)
-//       ),
-//       createdDate: new Date().toISOString(),
-//       comments: comments.slice(0, getRandomInt(1, 5)).map(() => ({
-//         text: shuffle(comments).slice(0, getRandomInt(1, 3)).join(` `)
-//       }))
-//     }));
-
 module.exports = {
   name: `--fill`,
   async run(args) {
@@ -87,8 +68,8 @@ module.exports = {
     const titles = await readContent(FILE_TITLES_PATH);
     const categories = await readContent(FILE_CATEGORIES_PATH);
     const commentSentences = await readContent(FILE_COMMENTS_PATH);
-
     const [count] = args;
+    console.log(`1111`, count);
     const countArticles = Number.parseInt(count, 10) || DEFAULT_COUNT;
     if (countArticles > MAX_COUNT) {
       console.info(chalk.red(`Не больше ${MAX_COUNT} публикаций`));
