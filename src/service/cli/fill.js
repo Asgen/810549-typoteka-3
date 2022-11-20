@@ -69,7 +69,6 @@ module.exports = {
     const categories = await readContent(FILE_CATEGORIES_PATH);
     const commentSentences = await readContent(FILE_COMMENTS_PATH);
     const [count] = args;
-    console.log(`1111`, count);
     const countArticles = Number.parseInt(count, 10) || DEFAULT_COUNT;
     if (countArticles > MAX_COUNT) {
       console.info(chalk.red(`Не больше ${MAX_COUNT} публикаций`));
