@@ -44,4 +44,18 @@ const getPictureFileName = (index) => {
   return `avatar${index}`;
 };
 
-module.exports = {getRandomInt, shuffle, readContent, readJson, getPictureFileName};
+const getRandomSubarray = (items) => {
+  items = items.slice();
+  let count = getRandomInt(1, items.length - 1);
+  const result = [];
+  while (count--) {
+    result.push(
+        ...items.splice(
+            getRandomInt(0, items.length - 1), 1
+        )
+    );
+  }
+  return result;
+};
+
+module.exports = {getRandomInt, shuffle, readContent, readJson, getPictureFileName, getRandomSubarray};

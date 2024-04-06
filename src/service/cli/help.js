@@ -8,7 +8,7 @@ const showHelp = () => {
 
     Гайд:
     service.js <command>
-    Комманды:
+    Команды:
   `;
 
   const table = {
@@ -16,6 +16,7 @@ const showHelp = () => {
     "--version": {описание: `выводит номер версии`},
     "--generate <count>": {описание: `формирует файл mocks.json`},
     "--fill <count>": {описание: `формирует fill-db.sql`},
+    "--filldb": {описание: `заполняет БД данными через sequelize`},
   };
 
   console.info(chalk.gray(text));

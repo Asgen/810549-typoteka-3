@@ -1,6 +1,6 @@
 "use strict";
 
-const axiosInstance = require(`./index.js`);
+const axiosInstance = require(`./instance.js`);
 
 const getAllComments = async () => {
   try {

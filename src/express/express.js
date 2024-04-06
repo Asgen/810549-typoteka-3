@@ -3,9 +3,10 @@
 const express = require(`express`);
 const path = require(`path`);
 
-const mainRoutes = require(`./routes/main-routes`);
-const articlesRoutes = require(`./routes/articles-routes`);
-const myRoutes = require(`./routes/my-routes`);
+// const mainRoutes = require(`./routes/main-routes`);
+// const articlesRoutes = require(`./routes/articles-routes`);
+// const myRoutes = require(`./routes/my-routes`);
+const offersRoutes = require(`./routes/offers-routes`);
 
 const DEFAULT_PORT = 8081;
 const PUBLIC_DIR = `public`;
@@ -17,9 +18,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(`/`, mainRoutes);
-app.use(`/articles`, articlesRoutes);
-app.use(`/my`, myRoutes);
+app.use(`/offers`, offersRoutes);
+// app.use(`/`, mainRoutes);
+// app.use(`/articles`, articlesRoutes);
+// app.use(`/my`, myRoutes);
 
 // Шаблоны
 app.set(`views`, path.resolve(__dirname, `templates`));

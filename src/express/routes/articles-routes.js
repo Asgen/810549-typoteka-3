@@ -6,8 +6,14 @@ const {getArticles, getArticle, addArticle} = require(`../api/articles`);
 const articlesRouter = new Router();
 
 articlesRouter.get(`/`, async (req, res) => {
-  const articles = await getArticles();
-  res.render(`articles`, {articles: articles.data});
+  try {
+    const articles = await getArticles();
+    res.render(`articles`, {articles: articles.data});
+  } catch (error) {
+    console.log(`---------------============`, error);
+    res.send(error);
+  }
+
 });
 
 articlesRouter.get(`/category/:id`, async (req, res) => {

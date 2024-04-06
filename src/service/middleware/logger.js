@@ -2,10 +2,12 @@
 require(`dotenv`).config();
 const {HttpCode} = require(`../../constants.js`);
 const pino = require(`pino`);
+const pretty = require(`pino-pretty`);
 
 const streams = [
   {level: `debug`, stream: process.stdout},
-  {level: `debug`, stream: pino.destination(`logs/all.log`)}];
+  {level: `debug`, stream: pretty()}];
+  // {level: `debug`, stream: pino.destination(`logs/all.log`)}];
 
 const logger = pino({
   name: `pino-and-express`,

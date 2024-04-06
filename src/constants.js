@@ -1,13 +1,13 @@
 "use strict";
 
-const MAX_ID_LENGTH = 4;
-const DEFAULT_COMMAND = `--help`;
-const USER_ARGV_INDEX = 2;
-const ExitCode = {
+module.exports.MAX_ID_LENGTH = 4;
+module.exports.DEFAULT_COMMAND = `--help`;
+module.exports.USER_ARGV_INDEX = 2;
+module.exports.ExitCode = {
   success: 0,
 };
 
-const HttpCode = {
+module.exports.HttpCode = {
   OK: 200,
   INVALID_DATA: 400,
   NOT_FOUND: 404,
@@ -16,17 +16,16 @@ const HttpCode = {
   UNAUTHORIZED: 401
 };
 
-const REQUIRED_FIELDS = [
+module.exports.REQUIRED_FIELDS = [
   `title`,
   `category`,
   `announce`,
   `fullText`
 ];
 
-const USER_ROLES = [
+module.exports.USER_ROLES = [
   `автор`,
   `читатель`
 ];
 
-
-module.exports = {MAX_ID_LENGTH, DEFAULT_COMMAND, USER_ARGV_INDEX, ExitCode, HttpCode, REQUIRED_FIELDS, USER_ROLES};
+module.exports.API_PREFIX = `/api`;

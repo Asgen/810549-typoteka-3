@@ -1,0 +1,16 @@
+div
+  each offer of offers
+    h3= offer.title
+    ul
+      li
+        p='title: ' + offer.title
+        p='description: ' + offer.description
+        ul='Categories:'
+        if offer.categories
+          each category of offer.categories
+            li= category.name
+        p='Created date: ' + offer.createdAt
+        ul='Comments: '
+        if offer.comments
+          each comment of offer.comments
+            li= comment.text
